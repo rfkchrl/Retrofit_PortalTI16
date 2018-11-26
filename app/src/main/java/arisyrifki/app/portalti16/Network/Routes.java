@@ -1,5 +1,7 @@
 package arisyrifki.app.portalti16.Network;
 
+import arisyrifki.app.portalti16.Entity.DaftarMahasiswa;
+import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
@@ -8,5 +10,5 @@ import retrofit2.http.GET;
 
 public interface Routes{
     @GET("list.php")
-    void getMahasiswa();
+    Call<DaftarMahasiswa> getMahasiswa();
 }
