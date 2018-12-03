@@ -3,7 +3,10 @@ package arisyrifki.app.portalti16;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import arisyrifki.app.portalti16.Adapter.MahasiswaAdapter;
 import arisyrifki.app.portalti16.Entity.DaftarMahasiswa;
@@ -19,40 +22,56 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    //public List<Mahasiswa> mahasiswas = new ArrayList<>();
+    private RecyclerView recyclerView ;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //casting recycler source repo umair
+        recyclerView = (RecyclerView)findViewById(R.id.recycler);
+        //LinearLayoutManager linear = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         requestDaftarMahasiswa();
     }
-
     private void requestDaftarMahasiswa(){
-        //memanggil request dari retrofit yang sudah dibuat
+        //pertama, memanggil request dari retrofit yang sudah dibuat
         Routes services = Network.request().create(Routes.class);
 
-        //kita melakukan request terhadap getMahasiswa()
+        //kite melakukan request terhadap getMahasiswa()
         services.getMahasiswa().enqueue(new Callback<DaftarMahasiswa>() {
             @Override
             public void onResponse(Call<DaftarMahasiswa> call, Response<DaftarMahasiswa> response) {
-                //mengecek request yang dilakukan berhasil atau tidak
-                if (response.isSuccessful()){
-                    //casting data yang didapat menjadi daftarmahasiswa
-                    DaftarMahasiswa  mahasiswas = response.body();
+                //cek request yang dilakukan, berhasil atau tidak
+                if(response.isSuccessful()){
+                    //casting data yang didapatkan menjadi DaftarMahasiswa
+                    DaftarMahasiswa mahasiswas = response.body();
 
                     //get title
                     Log.d("TI16", mahasiswas.getTitle());
 
-                    //tampilkan daftar mahasiswa di recyclerview
+                    //tampilkan daftar mahasiswa di recycler view
                     MahasiswaAdapter adapter = new MahasiswaAdapter(mahasiswas.getData());
+                    recyclerView.setAdapter(adapter);
                 }
             }
 
             @Override
             public void onFailure(Call<DaftarMahasiswa> call, Throwable t) {
+                onMahasiswaError();
+
 
             }
         });
-
     }
 
+    private void onMahasiswaError() {
+        Toast.makeText(
+                MainActivity.this,
+                "gagal",
+                Toast.LENGTH_LONG).show();
+
+    }
 }

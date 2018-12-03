@@ -17,4 +17,10 @@ public class DaftarMahasiswa {
     public List<Mahasiswa> getData() {
         return data;
     }
+
+    @Override
+    public String toString()
+    {
+        return "ClassPojo [title = "+title+", data = "+data+"]";
+    }
 }
