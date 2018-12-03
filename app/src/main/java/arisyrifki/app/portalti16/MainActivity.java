@@ -36,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         requestDaftarMahasiswa();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        requestDaftarMahasiswa();
+    }
+
     private void requestDaftarMahasiswa(){
         //pertama, memanggil request dari retrofit yang sudah dibuat
         Routes services = Network.request().create(Routes.class);
