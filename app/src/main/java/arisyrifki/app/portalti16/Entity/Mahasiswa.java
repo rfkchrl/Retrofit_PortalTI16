@@ -24,9 +24,5 @@ public class Mahasiswa implements Serializable{
         return nim;
     }
 
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [name = "+name+", nim = "+nim+"]";
-    }
+
 }

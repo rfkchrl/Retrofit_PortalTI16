@@ -1,11 +1,14 @@
 package arisyrifki.app.portalti16;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import arisyrifki.app.portalti16.Adapter.MahasiswaAdapter;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     //public List<Mahasiswa> mahasiswas = new ArrayList<>();
     private RecyclerView recyclerView ;
+    public Button buttonAdd;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.recycler);
         //LinearLayoutManager linear = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //casting Button
+        buttonAdd = (Button)findViewById(R.id.btn_input);
         requestDaftarMahasiswa();
     }
 
@@ -41,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         requestDaftarMahasiswa();
+        btnMove();
     }
 
     private void requestDaftarMahasiswa(){
@@ -68,8 +76,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<DaftarMahasiswa> call, Throwable t) {
                 onMahasiswaError();
-
-
             }
         });
     }
@@ -80,5 +86,16 @@ public class MainActivity extends AppCompatActivity {
                 "gagal",
                 Toast.LENGTH_LONG).show();
 
+    }
+
+    //digunakan untuk pindah antar layer
+    private void btnMove() {
+        buttonAdd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddMahasiswaActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

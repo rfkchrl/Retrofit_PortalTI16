@@ -34,8 +34,8 @@ public class AddMahasiswaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = edtName.getText().toString();
-                String nim = edtNim.getText().toString()
-                addNewMahasiswa();
+                String nim = edtNim.getText().toString();
+                addNewMahasiswa(name,nim);
             }
         });
     }

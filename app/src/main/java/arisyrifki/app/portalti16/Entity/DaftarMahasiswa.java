@@ -18,9 +18,5 @@ public class DaftarMahasiswa {
         return data;
     }
 
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [title = "+title+", data = "+data+"]";
-    }
+
 }

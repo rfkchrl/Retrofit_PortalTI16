@@ -12,10 +12,12 @@ import retrofit2.http.POST;
  */
 
 public interface Routes{
-    @GET("list.php")
+    //didapat dari https://ti16-api.herokuapp.com/ (Network)
+    @GET("list_mahasiswa")
     Call<DaftarMahasiswa> getMahasiswa();
 
-    @POST("add.php")
+    //didapat dari https://ti16-api.herokuapp.com/ (Network)
+    @POST("post_mahasiswa")
     Call<Mahasiswa> postMahasiswa(
         @Field("name") String name,
         @Field("nim") String nim
