@@ -1,8 +1,10 @@
 package arisyrifki.app.portalti16;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import arisyrifki.app.portalti16.Adapter.MahasiswaAdapter;
 import arisyrifki.app.portalti16.Entity.DaftarMahasiswa;
+import arisyrifki.app.portalti16.Entity.Mahasiswa;
 import arisyrifki.app.portalti16.Network.Network;
 import arisyrifki.app.portalti16.Network.Routes;
 import retrofit2.Call;
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         //agarr bisa di click
         switch (item.getItemId()){
-            case R.id.menu_refresh;
+            case R.id.menu_refresh:
                 //ketika menu di refresh, maka panggil
                 requestDaftarMahasiswa();
                 break;
@@ -74,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void requestDaftarMahasiswa(){
         //pertama, memanggil request dari retrofit yang sudah dibuat
-        Routes services = Network.request().create(Routes.class);
+        final Routes services = Network.request().create(Routes.class);
 
         //kite melakukan request terhadap getMahasiswa()
         services.getMahasiswa().enqueue(new Callback<DaftarMahasiswa>() {
@@ -90,6 +93,16 @@ public class MainActivity extends AppCompatActivity {
 
                     //tampilkan daftar mahasiswa di recycler view
                     MahasiswaAdapter adapter = new MahasiswaAdapter(mahasiswas.getData());
+
+                    //untuk handle item delet di item mahasiswa
+                    //untuk menghapus data di API
+                    adapter.setListener(new MahasiswaAdapter.MahasiswaListener(){
+                        @Override
+                        public void OnDelete(int mhsId) {
+                            String id = String.valueOf(mhsId);
+                            deleteMahasiswa(services, id);
+                        }
+                    });
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -119,4 +132,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void deleteMahasiswa(final Routes services, final String mhsId){
+        //jika alert akan memunculkan ini
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        //title dari aletnya
+        alert.setTitle(R.string.app_name);
+        //pesan alertnya
+        alert.setMessage("are you sure ? ");
+
+        //jika tidak
+        alert.setNegativeButton("no", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        //jika iya maka akan menghapus berdasarkan idnya
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                services.deleteMahasiswa(mhsId).enqueue(new Callback<Mahasiswa>(){
+
+                    @Override
+                    public void onResponse(Call<Mahasiswa> call, Response<Mahasiswa> response) {
+                        if (response.isSuccessful()) {
+                            //jika berhasil akan merequest daftar mahasiswa
+                            requestDaftarMahasiswa();
+                        } else {
+                            //jika terdapat error saat menghapus memunculkan methode ini
+                            onMahasiswaError();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Mahasiswa> call, Throwable t) {
+                        onMahasiswaError();
+
+                    }
+                });
+            }
+        });
+        alert.show();
+    }
+
 }

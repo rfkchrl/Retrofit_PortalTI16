@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 
 public class Mahasiswa implements Serializable{
+    private int id;
     private String name;
     private String nim;
 
@@ -25,4 +26,7 @@ public class Mahasiswa implements Serializable{
     }
 
 
+    public int getId() {
+        return id;
+    }
 }
