@@ -4,6 +4,7 @@ import arisyrifki.app.portalti16.Entity.DaftarMahasiswa;
 import arisyrifki.app.portalti16.Entity.Mahasiswa;
 import retrofit2.Call;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
@@ -13,11 +14,12 @@ import retrofit2.http.POST;
 
 public interface Routes{
     //didapat dari https://ti16-api.herokuapp.com/ (Network)
-    @GET("list_mahasiswa")
+    @GET("dev/list_mahasiswa")
     Call<DaftarMahasiswa> getMahasiswa();
 
     //didapat dari https://ti16-api.herokuapp.com/ (Network)
-    @POST("post_mahasiswa")
+    @FormUrlEncoded
+    @POST("dev/insert_mahasiswa")
     Call<Mahasiswa> postMahasiswa(
         @Field("name") String name,
         @Field("nim") String nim

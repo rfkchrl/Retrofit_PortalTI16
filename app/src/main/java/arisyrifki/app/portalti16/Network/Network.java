@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Network {
     public static Retrofit request(){
         return new Retrofit.Builder()
-                .baseUrl("https://ti16-api.herokuapp.com/")
+                .baseUrl("http://35.186.145.167:1337/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
