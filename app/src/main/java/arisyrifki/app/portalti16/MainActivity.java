@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,7 +13,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import arisyrifki.app.portalti16.Adapter.MahasiswaAdapter;
@@ -20,6 +20,7 @@ import arisyrifki.app.portalti16.Entity.DaftarMahasiswa;
 import arisyrifki.app.portalti16.Entity.Mahasiswa;
 import arisyrifki.app.portalti16.Network.Network;
 import arisyrifki.app.portalti16.Network.Routes;
+import arisyrifki.app.portalti16.Util.Consts;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     //public List<Mahasiswa> mahasiswas = new ArrayList<>();
     private RecyclerView recyclerView ;
-    public Button buttonAdd;
+    public FloatingActionButton buttonAdd;
 
 
     @Override
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         //LinearLayoutManager linear = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //casting Button
-        buttonAdd = (Button)findViewById(R.id.btn_input);
+        buttonAdd = (FloatingActionButton)findViewById(R.id.btn_add);
         requestDaftarMahasiswa();
     }
 
@@ -127,7 +128,9 @@ public class MainActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddMahasiswaActivity.class);
+                Intent intent = new Intent(MainActivity.this, DetailMahasiswaActivity.class);
+                intent.putExtra(Consts.KEY_ACTION_DETAIL, Consts.INTENT_ADD);
+
                 startActivity(intent);
             }
         });

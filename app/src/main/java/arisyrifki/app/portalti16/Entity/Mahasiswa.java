@@ -16,6 +16,14 @@ public class Mahasiswa implements Serializable{
         this.nim = nim;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
+
     public String getName() {
                 return name;
     }
@@ -29,4 +37,6 @@ public class Mahasiswa implements Serializable{
     public int getId() {
         return id;
     }
-}
+    }
+
+
