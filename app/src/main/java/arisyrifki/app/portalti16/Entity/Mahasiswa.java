@@ -1,13 +1,21 @@
 package arisyrifki.app.portalti16.Entity;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.io.Serializable;
 
 /**
  * Created by rfkchrl on 11/26/2018.
  */
 
+@Entity(tableName = "mahasiswa")
 public class Mahasiswa implements Serializable{
+
+    //setiap di table lebih enak ada idnya, jadi dijadiin primarykey ditabel
+    @PrimaryKey(autoGenerate = true)
     private int id;
+
     private String name;
     private String nim;
 
