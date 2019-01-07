@@ -5,7 +5,11 @@
         android:id="@+id/menu_refresh"
         android:title="Refresh"
         android:icon="@drawable/ic_autorenew_black_24dp"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/menu_favorite"
+        android:title="Favorite"
+        android:icon="@mipmap/ic_launcher"
+        app:showAsAction="ifRoom"/>
 
 </menu>

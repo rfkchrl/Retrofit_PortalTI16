@@ -4,6 +4,8 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import java.util.List;
+
 import arisyrifki.app.portalti16.Entity.Mahasiswa;
 
 /**
@@ -32,6 +34,11 @@ public class MahasiswaRepository {
             }
 
         }.execute();
+    }
+
+
+    public List<Mahasiswa> getMahasiswas() {
+        return mahasiswaDatabase.mahasiswaDao().getMahasiswa();
     }
 }
 

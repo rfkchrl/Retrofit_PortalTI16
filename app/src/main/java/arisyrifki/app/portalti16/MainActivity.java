@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import arisyrifki.app.portalti16.Adapter.MahasiswaAdapter;
+import arisyrifki.app.portalti16.Data.MahasiswaRepository;
 import arisyrifki.app.portalti16.Entity.DaftarMahasiswa;
 import arisyrifki.app.portalti16.Entity.Mahasiswa;
 import arisyrifki.app.portalti16.Network.Network;
@@ -68,6 +69,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         //agarr bisa di click
         switch (item.getItemId()){
+            case R.id.menu_favorite:
+                startActivity(new Intent(MainActivity.this, FavoriteActivity.class));
+                finish();
+                //ketika menu di fav, maka panggil
+                requestDaftarMahasiswa();
+                break;
+
             case R.id.menu_refresh:
                 //ketika menu di refresh, maka panggil
                 requestDaftarMahasiswa();
@@ -102,6 +110,12 @@ public class MainActivity extends AppCompatActivity {
                         public void OnDelete(int mhsId) {
                             String id = String.valueOf(mhsId);
                             deleteMahasiswa(services, id);
+                        }
+
+                        @Override
+                        public void OnFav(Mahasiswa mahasiswa) {
+                            MahasiswaRepository mahasiswaRepository = new MahasiswaRepository(MainActivity.this);
+                            mahasiswaRepository.insertMahasiswa(mahasiswa);
                         }
                     });
                     recyclerView.setAdapter(adapter);

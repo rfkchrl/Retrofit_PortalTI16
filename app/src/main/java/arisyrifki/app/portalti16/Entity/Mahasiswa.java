@@ -12,6 +12,10 @@ import java.io.Serializable;
 @Entity(tableName = "mahasiswa")
 public class Mahasiswa implements Serializable{
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     //setiap di table lebih enak ada idnya, jadi dijadiin primarykey ditabel
     @PrimaryKey(autoGenerate = true)
     private int id;

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp">
+    android:layout_marginTop="6dp"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="6dp">
 
     <ImageView
         android:id="@+id/img_foto"
@@ -17,32 +17,48 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp">
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/img_foto">
 
         <TextView
             android:id="@+id/txt_nama"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:text="Nama"/>
 
         <TextView
             android:id="@+id/txt_nim"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:text="0110216061"/>
+            android:text="0110216061" />
 
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="20dp"
-        android:background="@null"
-        android:text="Delete" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Delete"
+            android:background="@null"/>
+
+        <Button
+            android:id="@+id/btn_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Fav"
+            android:background="@null"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

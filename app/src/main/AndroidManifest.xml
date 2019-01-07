@@ -25,6 +25,11 @@
             android:name=".DetailMahasiswaActivity"
             android:parentActivityName=".MainActivity"
             />
+
+        <activity
+            android:name=".FavoriteActivity"
+            android:parentActivityName=".MainActivity"
+            />
     </application>
 
 </manifest>
